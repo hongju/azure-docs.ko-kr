@@ -19,7 +19,7 @@ ms.locfileid: "59548666"
 ---
 # <a name="designing-a-polybase-data-loading-strategy-for-azure-sql-data-warehouse"></a>Azure SQL Data Warehouse용 PolyBase 데이터 로드 전략 설계
 
-기존의 SMPT 데이터 웨어하우스는 데이터를 로드할 때 ETL(추출, 변환 및 로드) 프로세스를 사용합니다. Azure SQL Data Warehouse는 확장성과 유연성이 뛰어난 컴퓨팅 및 스토리지 리소스를 활용하는 MPP(Massively Parallel Processing) 아키텍처입니다. 이 아키텍처에서는 ELT(추출, 로드 및 변환) 프로세스를 통해 MPP를 활용할 수 있으며, 데이터를 로드하기 전에 리소스를 사용하여 변환할 필요가 없습니다. SQL Data Warehouse는 BCP, SQL BulkCopy API 등의 Polybase 이외 옵션을 비롯한 여러 로드 방법을 지원하지만, 데이터를 최대한 확장할 수 있도록 가장 빠르게 로드하려면 Polybase를 사용해야 합니다.  PolyBase는 T-SQL 언어를 통해 Azure Blob Storage 또는 Azure Data Lake Store에 저장된 외부 데이터에 액세스하는 기술입니다.
+기존의 SMP 데이터 웨어하우스는 데이터를 로드할 때 ETL(추출, 변환 및 로드) 프로세스를 사용합니다. Azure SQL Data Warehouse는 확장성과 유연성이 뛰어난 컴퓨팅 및 스토리지 리소스를 활용하는 MPP(Massively Parallel Processing) 아키텍처입니다. 이 아키텍처에서는 ELT(추출, 로드 및 변환) 프로세스를 통해 MPP를 활용할 수 있으며, 데이터를 로드하기 전에 리소스를 사용하여 변환할 필요가 없습니다. SQL Data Warehouse는 BCP, SQL BulkCopy API 등의 Polybase 이외 옵션을 비롯한 여러 로드 방법을 지원하지만, 데이터를 최대한 확장할 수 있도록 가장 빠르게 로드하려면 Polybase를 사용해야 합니다.  PolyBase는 T-SQL 언어를 통해 Azure Blob Storage 또는 Azure Data Lake Store에 저장된 외부 데이터에 액세스하는 기술입니다.
 
 > [!VIDEO https://www.youtube.com/embed/l9-wP7OdhDk]
 
@@ -33,7 +33,7 @@ SQL Data Warehouse용 PolyBase ELT을 구현하는 기본적인 단계는 다음
 1. 원본 데이터를 텍스트 파일로 추출합니다.
 2. Azure Blob Storage 또는 Azure Data Lake Store에 데이터를 둡니다.
 3. 로드할 데이터를 준비합니다.
-4. PolyBase를 사용하여 데이터를 SQL Data Warehouse 준비 테이블로 로드합니다. 
+4. PolyBase를 사용하여 데이터를 SQL Data Warehouse 스테이징 테이블로 로드합니다. 
 5. 데이터를 변환합니다.
 6. 프로덕션 테이블에 데이터를 삽입합니다.
 
@@ -88,9 +88,9 @@ Azure 스토리지에 데이터를 두려면 [Azure Blob Storage](../storage/blo
 - 종결자로 텍스트 파일의 필드를 구분합니다.  원본 데이터에서 찾을 수 없는 문자 또는 문자 시퀀스를 사용해야 합니다. [CREATE EXTERNAL FILE FORMAT](/sql/t-sql/statements/create-external-file-format-transact-sql)으로 지정한 종결자를 사용하세요.
 
 
-## <a name="4-load-the-data-into-sql-data-warehouse-staging-tables-using-polybase"></a>4. PolyBase를 사용하여 SQL Data Warehouse 준비 테이블로 데이터 로드
+## <a name="4-load-the-data-into-sql-data-warehouse-staging-tables-using-polybase"></a>4. PolyBase를 사용하여 SQL Data Warehouse 스테이징 테이블로 데이터 로드
 
-데이터는 준비 테이블로 로드하는 것이 가장 좋습니다. 준비 테이블을 사용하면 프로덕션 테이블에 영향을 주지 않고 오류를 처리할 수 있습니다. 또한 준비 테이블에서는 데이터를 프로덕션 테이블에 삽입하기 전에 SQL Data Warehouse MPP를 사용하여 데이터 변환을 수행할 수도 있습니다.
+데이터는 스테이징 테이블로 로드하는 것이 가장 좋습니다. 스테이징 테이블을 사용하면 프로덕션 테이블에 영향을 주지 않고 오류를 처리할 수 있습니다. 또한 스테이징 테이블에서는 데이터를 프로덕션 테이블에 삽입하기 전에 SQL Data Warehouse MPP를 사용하여 데이터 변환을 수행할 수도 있습니다.
 
 ### <a name="options-for-loading-with-polybase"></a>PolyBase로 로드하기 위한 옵션
 
@@ -108,14 +108,14 @@ PolyBase를 사용하여 데이터를 로드하려는 경우 다음 로드 옵�
 
 ## <a name="5-transform-the-data"></a>5. 데이터 변환
 
-데이터가 준비 테이블에 있는 동안, 워크로드에 필요한 변환을 수행하세요. 그런 다음 데이터를 프로덕션 테이블로 이동하세요.
+데이터가 스테이징 테이블에 있는 동안, 워크로드에 필요한 변환을 수행하세요. 그런 다음 데이터를 프로덕션 테이블로 이동하세요.
 
 
 ## <a name="6-insert-the-data-into-production-tables"></a>6. 프로덕션 테이블에 데이터 삽입
 
 INSERT INTO ... SELECT 문은 스테이징 테이블에서 영구 테이블로 데이터를 이동합니다. 
 
-ETL 프로세스를 설계할 때 작은 테스트 샘플에서 프로세스를 실행해 보세요. 테이블에서 파일로 1000개 행을 추출하여 Azure로 이동한 다음 준비 테이블에 로드해 보세요. 
+ETL 프로세스를 설계할 때 작은 테스트 샘플에서 프로세스를 실행해 보세요. 테이블에서 파일로 1000개 행을 추출하여 Azure로 이동한 다음 스테이징 테이블에 로드해 보세요. 
 
 
 ## <a name="partner-loading-solutions"></a>파트너 로드 솔루션
