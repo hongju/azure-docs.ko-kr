@@ -65,7 +65,7 @@ Visual Studio 2017이 아직 설치되지 않은 경우 **체험판** [Visual St
 
 이제 코드 사용으로 전환해 보겠습니다. [GitHub에서 SQL API 앱](https://github.com/Azure-Samples/cosmos-dotnet-todo-app)을 복제하고 연결 문자열을 설정하고 실행해보겠습니다. 
 
-1. 명령 프롬프트를 git-samples라는 새 폴더를 만든 다음 명령 프롬프트를 닫습니다.
+1. 명령 프롬프트를 열고, git-samples라는 새 폴더를 만든 다음 명령 프롬프트를 닫습니다.
 
     ```bash
     md "C:\git-samples"
@@ -155,7 +155,7 @@ Visual Studio 2017이 아직 설치되지 않은 경우 **체험판** [Visual St
 
    ![샘플 데이터를 사용한 Todo 앱](./media/create-sql-api-dotnet/azure-comosdb-todo-app-list-preview.png)
 
-이제 Data Explorer로 돌아가서 이 새 데이터를 보고, 쿼리 및 수정하고 작업에 사용할 수 있습니다. 
+이제 데이터 탐색기로 돌아가서 이 새 데이터를 보고, 쿼리 및 수정하고 작업에 사용할 수 있습니다. 
 
 ## <a name="review-slas-in-the-azure-portal"></a>Azure Portal에서 SLA 검토
 
@@ -167,7 +167,7 @@ Visual Studio 2017이 아직 설치되지 않은 경우 **체험판** [Visual St
 
 ## <a name="next-steps"></a>다음 단계
 
-이 빠른 시작에서는 Azure Cosmos DB 계정을 만들고, 컨테이너를 만들고 Data Explorer를 사용하여 항목을 추가하고, 웹앱을 실행하는 방법을 알아보았습니다. 이제 사용자의 Cosmos DB 계정에 추가 데이터를 가져올 수 있습니다. 
+이 빠른 시작에서는 Azure Cosmos DB 계정을 만들고, 컨테이너를 만들고 데이터 탬색기를 사용하여 항목을 추가하고, 웹앱을 실행하는 방법을 알아보았습니다. 이제 사용자의 Cosmos DB 계정에 추가 데이터를 가져올 수 있습니다. 
 
 > [!div class="nextstepaction"]
 > [Azure Cosmos DB로 데이터 가져오기](import-data.md)
