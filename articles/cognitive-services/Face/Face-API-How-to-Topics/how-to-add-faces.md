@@ -32,7 +32,7 @@ FaceList 및 LargePersonGroup에도 동일한 전략이 적용됩니다.
 - `_timeStampQueue`는 요청 타임스탬프를 기록하는 큐입니다.
 - `await WaitCallLimitPerSecondAsync()`는 다음 요청을 보낼 수 있을 때까지 대기합니다.
 
-```CSharp
+```C#
 const int PersonCount = 10000;
 const int CallLimitPerSecond = 10;
 static Queue<DateTime> _timeStampQueue = new Queue<DateTime>(CallLimitPerSecond);
@@ -64,7 +64,7 @@ static async Task WaitCallLimitPerSecondAsync()
 
 클라이언트 라이브러리를 사용하는 경우 구독 키는 FaceServiceClient 클래스의 생성자를 통해 전달됩니다. 예를 들면 다음과 같습니다.
 
-```CSharp
+```C#
 FaceServiceClient faceServiceClient = new FaceServiceClient("<Subscription Key>");
 ```
 
@@ -75,7 +75,7 @@ FaceServiceClient faceServiceClient = new FaceServiceClient("<Subscription Key>"
 사람을 저장하기 위한 "MyPersonGroup"이라는 PersonGroup이 만들어집니다.
 전체 유효성을 검사하기 위해 요청 시간이 `_timeStampQueue`에 추가됩니다.
 
-```CSharp
+```C#
 const string personGroupId = "mypersongroupid";
 const string personGroupName = "MyPersonGroup";
 _timeStampQueue.Enqueue(DateTime.UtcNow);
@@ -86,7 +86,7 @@ await faceServiceClient.CreatePersonGroupAsync(personGroupId, personGroupName);
 
 사람이 동시에 만들어지고 호출 제한을 초과하지 않기 위해 `await WaitCallLimitPerSecondAsync()`가 적용됩니다.
 
-```CSharp
+```C#
 CreatePersonResult[] persons = new CreatePersonResult[PersonCount];
 Parallel.For(0, PersonCount, async i =>
 {
@@ -102,7 +102,7 @@ Parallel.For(0, PersonCount, async i =>
 여러 사람에게 얼굴을 추가하는 작업은 동시에 처리되고, 특정한 한 사람에만 추가하는 작업은 순차적으로 처리됩니다.
 요청 빈도가 제한 범위를 벗어나지 않도록 방지하기 위해 다시 한 번 `await WaitCallLimitPerSecondAsync()`가 호출됩니다.
 
-```CSharp
+```C#
 Parallel.For(0, PersonCount, async i =>
 {
     Guid personId = persons[i].PersonId;
