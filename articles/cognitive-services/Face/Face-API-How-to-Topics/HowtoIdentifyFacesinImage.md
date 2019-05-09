@@ -51,7 +51,7 @@ https://westus.api.cognitive.microsoft.com/face/v1.0/detect[?returnFaceId][&retu
 
 대안으로 HTTP 요청 헤더에서 구독 키 **ocp-apim-subscription-key: &lt;구독 키&gt;** 를 지정할 수도 있습니다. 클라이언트 라이브러리를 사용하는 경우 구독 키는 FaceServiceClient 클래스의 생성자를 통해 전달됩니다. 예를 들면 다음과 같습니다.
  
-```CSharp 
+```C# 
 faceServiceClient = new FaceServiceClient("<Subscription Key>");
 ```
  
@@ -68,7 +68,7 @@ faceServiceClient = new FaceServiceClient("<Subscription Key>");
 
 먼저 새 PersonGroup을 만들어야 합니다. 이 작업은 [PersonGroup - 만들기](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395244) API를 사용하여 실행됩니다. 해당 클라이언트 라이브러리 API는 FaceServiceClient 클래스에 대한 CreatePersonGroupAsync 메서드입니다. 그룹을 만들기 위해 지정된 그룹 ID는 각 구독에 대해 고유합니다. 따라서 다른 PersonGroup API를 사용하여 PersonGroup을 가져오거나 업데이트하거나 삭제할 수도 있습니다. 그룹이 정의되면, [PersonGroup Person - 만들기](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523c) API를 사용하여 그룹 안에 사람을 정의할 수 있습니다. 클라이언트 라이브러리 메서드는 CreatePersonAsync입니다. 각 사용자를 만든 후에는 얼굴을 추가할 수 있습니다.
 
-```CSharp 
+```C# 
 // Create an empty PersonGroup
 string personGroupId = "myfriends";
 await faceServiceClient.CreatePersonGroupAsync(personGroupId, "My Friends");
@@ -89,7 +89,7 @@ CreatePersonResult friend1 = await faceServiceClient.CreatePersonAsync(
 감지된 각 얼굴에 대해 [PersonGroup Person – 얼굴 추가](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523b)를 호출하여 올바른 사용자에게 추가할 수 있습니다.
 
 다음 코드에서는 이미지에서 얼굴을 감지한 후 사람에게 추가하는 방법 프로세스를 보여 줍니다.
-```CSharp 
+```C# 
 // Directory contains image files of Anna
 const string friend1ImageDir = @"D:\Pictures\MyFriends\Anna\";
  
@@ -110,13 +110,13 @@ foreach (string imagePath in Directory.GetFiles(friend1ImageDir, "*.jpg"))
 
 PersonGroup을 사용하여 식별을 수행하려면 먼저 PersonGroup이 학습되어야 합니다. 그뿐 아니라 사람을 추가 또는 제거한 후에나 사람의 등록된 얼굴이 편집된 경우 다시 학습되어야 합니다. 학습은 [PersonGroup – 학습](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395249) API를 통해 수행됩니다. 클라이언트 라이브러리를 사용할 때 다음과 같이 TrainPersonGroupAsync 메서드를 호출하기만 하면 됩니다.
  
-```CSharp 
+```C# 
 await faceServiceClient.TrainPersonGroupAsync(personGroupId);
 ```
  
 학습은 비동기 프로세스입니다. TrainPersonGroupAsync 메서드가 반환된 후에도 완료되지 않을 수 있습니다. [PersonGroup - 학습 상태 가져오기](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395247) API 또는 클라이언트 라이브러리의 GetPersonGroupTrainingStatusAsync 메서드를 사용하여 학습 상태를 쿼리해야 할 수도 있습니다. 다음 코드에서는 PersonGroup 학습이 완료될 때까지 기다리는 간단한 논리를 보여 줍니다.
  
-```CSharp 
+```C# 
 TrainingStatus trainingStatus = null;
 while(true)
 {
@@ -139,7 +139,7 @@ while(true)
 
 다음 코드에서는 식별 프로세스를 보여 줍니다.
 
-```CSharp 
+```C# 
 string testImageFile = @"D:\Pictures\test_img1.jpg";
 
 using (Stream s = File.OpenRead(testImageFile))
