@@ -1,6 +1,6 @@
 ---
 title: Azure Database for PostgreSQL-단일 서버에서에서 복제본 읽기
-description: 이 문서는 PostgreSQL-단일 서버에 대 한 Azure Database에서 읽기 복제본 기능을 설명합니다.
+description: 이 문서는 PostgreSQL-단일 서버에 대한 Azure Database에서 읽기 복제본 기능을 설명합니다.
 author: rachel-msft
 ms.author: raagyema
 ms.service: postgresql
@@ -33,7 +33,7 @@ ms.locfileid: "65510970"
 
 읽기 복제본 기능은 PostgreSQL 동기식 복제를 사용합니다. 이 기능은 동기식 복제 시나리오를 위한 것이 아닙니다. 마스터와 복제본 간에는 측정 가능한 지연이 발생합니다. 복제본의 데이터는 결과적으로 마스터의 데이터와 일치하게 됩니다. 이러한 지연 시간을 수용할 수 있는 워크로드에 이 기능을 사용합니다.
 
-읽기 복제본 재해 복구 계획을 향상 시킬 수 있습니다. 먼저 마스터에서 다른 Azure 지역에 복제 하려면 해야 합니다. 지역 재해의 경우에 해당 복제본에 복제를 중지 하 고 워크 로드를 리디렉션할 수 있습니다. 복제 중지 쓰기를 허용 하려면 복제본을 사용 하면으로 읽습니다. 자세한 내용은 합니다 [복제를 중지](#stop-replication) 섹션. 
+읽기 복제본은 재해 복구 계획을 향상 시킬 수 있습니다. 먼저 마스터에서 다른 Azure 지역에 복제본을 생성할 필요가 있습니다. 지역 재해의 경우에 해당 복제본에 복제를 중지하고 워크로드를 리디렉션할 수 있습니다. 복제를 중지하면 본제본에 읽기 뿐만 아니라 쓰기를 허용합니다. 자세한 내용은 [복제 중지](#stop-replication) 섹션을 확인합니다. 
 
 ## <a name="create-a-replica"></a>복제본 만들기
 마스터 서버는 `azure.replication_support` 매개 변수를 **REPLICA**로 설정해야 합니다. 이 매개 변수가 변경되면, 서버를 다시 시작해야 변경 사항이 적용됩니다. (`azure.replication_support` 매개 변수는 범용 및 메모리 최적화 계층에만 적용됩니다).
@@ -52,7 +52,7 @@ ms.locfileid: "65510970"
 
 복제본은 마스터 서버에서 해당 관리자 계정을 상속합니다. 마스터 서버의 모든 사용자 계정은 읽기 복제본으로 복제됩니다. 마스터 서버에서 사용 가능한 사용자 계정을 사용해야만 읽기 복제본에 연결할 수 있습니다.
 
-일반 Azure Database for PostgreSQL 서버에서처럼 같이 해당 호스트 이름 및 유효한 사용자 계정을 사용하여 복제본에 연결할 수 있습니다. 서버에 대해 **내 복제본** 관리자 사용자 이름 **myadmin**, psql을 사용 하 여 복제본에 연결할 수 있습니다.
+일반 Azure Database for PostgreSQL 서버에서처럼 해당 호스트 이름 및 유효한 사용자 계정을 사용하여 복제본에 연결할 수 있습니다. **myreplica**라는 서버에 관리자 사용자 이름이 **myadmin** 인 경우, 다음 psql을 사용하여 복제본에 연결할 수 있습니다.
 
 ```
 psql -h myreplica.postgres.database.azure.com -U myadmin@myreplica -d postgres
@@ -101,7 +101,7 @@ AS total_log_delay_in_bytes from pg_stat_replication;
 > 독립 실행형 서버를 다시 복제본으로 만들 수 없습니다.
 > 읽기 복제본에서 복제를 중지하기 전에 복제본에 필요한 모든 데이터가 있는지 확인하십시오.
 
-복제를 중지 하면 복제본 이전 마스터 및 다른 복제본에 모든 링크가 손실 됩니다. 마스터 및 복제본 간에 자동된 장애 조치가 있습니다. 
+복제를 중지 하면 복제본 이전 마스터 및 다른 복제본에 모든 링크가 손실 됩니다. 마스터 및 복제본 간에 자동 장애 조치가 없습니다. 
 
 [복제본에 대한 복제를 중지](howto-read-replicas-portal.md)하는 방법을 알아봅니다.
 
