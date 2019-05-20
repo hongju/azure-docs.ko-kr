@@ -1,6 +1,6 @@
 ---
-title: 만들기 및 PostgreSQL-단일 서버에 대 한 Azure Database에서 방화벽 규칙 관리
-description: 만들기 및 PostgreSQL-Azure portal을 사용 하 여 단일 서버에 대 한 Azure Database에 대 한 방화벽 규칙 관리
+title: Azure Database for PostgreSQL - 단일 서버에서 방화벽 규칙 만들기 및 관리
+description: Azure portal을 사용하여 Azure Database for PostgreSQL - 단일 서버에 대한 방화벽 규칙 만들기 및 관리
 author: rachel-msft
 ms.author: raagyema
 ms.service: postgresql
@@ -13,10 +13,10 @@ ms.contentlocale: ko-KR
 ms.lasthandoff: 05/06/2019
 ms.locfileid: "65069013"
 ---
-# <a name="create-and-manage-firewall-rules-for-azure-database-for-postgresql---single-server-using-the-azure-portal"></a>만들기 및 PostgreSQL-Azure portal을 사용 하 여 단일 서버에 대 한 Azure Database에 대 한 방화벽 규칙 관리
-서버 수준 방화벽 규칙은 지정된 된 IP 주소 또는 IP 주소 범위에서 PostgreSQL 서버용 Azure Database에 대 한 액세스 관리를 사용할 수 있습니다.
+# <a name="create-and-manage-firewall-rules-for-azure-database-for-postgresql---single-server-using-the-azure-portal"></a>Azure Portal을 사용하여 Azure Database for PostgreSQL - 단일 서버에 대한 방화벽 규칙 만들기 및 관리
+서버 수준 방화벽 규칙은 지정된 IP 주소 또는 IP 주소 범위에서 PostgreSQL 서버용 Azure Database에 대한 액세스 관리를 사용할 수 있습니다.
 
-Virtual Network (VNet) 규칙은 서버에 대 한 액세스를 보호 하려면 데도 사용할 수 있습니다. 에 대해 자세히 알아보세요 [만들기 및 관리 가상 네트워크 서비스 끝점 및 Azure portal을 사용 하 여 규칙](howto-manage-vnet-using-portal.md)합니다.
+Virtual Network (VNet) 규칙도 서버에 대한 액세스를 보호하는데 사용할 수 있습니다. [Azure Portal을 사용하여 VNet 서비스 엔드포인트 및 VNet 규칙 만들기 및 관리](howto-manage-vnet-using-portal.md)에 대해 알아봅니다.
 
 ## <a name="prerequisites"></a>필수 조건
 이 방법 가이드를 단계별로 실행하려면 다음이 필요합니다.
@@ -27,7 +27,7 @@ Virtual Network (VNet) 규칙은 서버에 대 한 액세스를 보호 하려면
 
    ![Azure Portal - 보안 연결 클릭](./media/howto-manage-firewall-using-portal/1-connection-security.png)
 
-2. 도구 모음에서 **내 IP 추가**를 클릭합니다. 이렇게 하면 Azure 시스템에서 감지한 컴퓨터의 공용 IP 주소를 사용하는 방화벽 규칙이 자동으로 만들어집니다.
+2. 도구 모음에서 **클라이언트 IP 추가**를 클릭합니다. 이렇게 하면 Azure 시스템에서 감지한 컴퓨터의 공용 IP 주소를 사용하는 방화벽 규칙이 자동으로 만들어집니다.
 
    ![Azure Portal - 내 IP 추가 클릭](./media/howto-manage-firewall-using-portal/2-add-my-ip.png)
 
@@ -53,12 +53,12 @@ Azure의 애플리케이션에서 Azure Database for PostgreSQL 서버에 연결
 
 ## <a name="manage-existing-server-level-firewall-rules-through-the-azure-portal"></a>Azure 포털을 통해 기존 서버 수준 방화벽 규칙 관리
 방화벽 규칙을 관리하는 단계를 반복합니다.
-* 현재 컴퓨터를 추가하려면 **+ 내 IP 추가** 단추를 클릭합니다. **저장** 을 클릭하여 변경 내용을 저장합니다.
+* 현재 컴퓨터를 추가하려면 **+  IP 추가** 단추를 클릭합니다. **저장** 을 클릭하여 변경 내용을 저장합니다.
 * 추가 IP 주소를 추가 하려면 규칙 이름, 시작 IP 주소 및 끝 IP 주소를 입력 합니다. **저장**을 클릭하여 변경 내용을 저장합니다.
 * 기존 규칙을 수정 하려면 규칙의 필드 중 하나를 클릭 후 변경 합니다. **저장**을 클릭하여 변경 내용을 저장합니다.
 * 기존 규칙을 삭제하려면 줄임표 [...]를 클릭하고 **삭제**를 클릭하여 규칙을 제거합니다. **저장**을 클릭하여 변경 내용을 저장합니다.
 
 ## <a name="next-steps"></a>다음 단계
 - 마찬가지로 [Azure CLI를 사용한 PostgreSQL용 Azure Database 방화벽 규칙 만들기 및 관리](howto-manage-firewall-using-cli.md)를 읽을 수 있습니다.
-- 서버에 대 한 액세스 보안을 강화할 [만들기 및 관리 가상 네트워크 서비스 끝점 및 Azure portal을 사용 하 여 규칙](howto-manage-vnet-using-portal.md)합니다.
+- [Azure Portal을 사용하여 VNet 서비스 엔드포인트 및 VNet 규칙 만들기 및 관리](howto-manage-vnet-using-portal.md)를 통해 서버에 대한 액세스 보안을 강화합니다.
 - PostgreSQL용 Azure Database 서버 연결에 대한 도움말은 [PostgreSQL용 Azure Database에 대한 연결 라이브러리](concepts-connection-libraries.md)를 참조하세요.
