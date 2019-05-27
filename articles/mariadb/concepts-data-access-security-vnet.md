@@ -50,9 +50,9 @@ ms.locfileid: "60332838"
 
 작업을 수행할 때까지 서브넷의 VM은 Azure Database for MariaDB 서버와 통신할 수 없습니다. 통신을 설정하는 한 동작은 가상 네트워크 규칙을 생성하는 것입니다. VNet 규칙 접근 방식을 선택하는 원리에는 방화벽에서 제공된 경쟁 보안 옵션에 관련된 비교-대비 토론이 필요합니다.
 
-### <a name="a-allow-access-to-azure-services"></a>a. Azure 서비스에 대한 액세스 허용
+### <a name="a-allow-access-to-azure-services"></a>A. Azure 서비스 방문 허용
 
-연결 보안 창에는 **Azure 서비스에 대한 액세스 허용**이라고 표시된 **켜기/끄기** 단추가 있습니다. **켜기** 설정은 모든 Azure IP 주소와 모든 Azure 서브넷에서 보낸 통신을 허용합니다. 이러한 Azure IP 또는 서브넷은 사용자가 소유할 수 없습니다. 이 **켜기** 설정은 Azure Database for MariaDB 데이터베이스에 필요한 것보다 더 개방적일 수 있습니다. 가상 네트워크 규칙 기능으로 훨씬 더 세밀하게 제어할 수 있습니다.
+연결 보안 창에는 **Azure 서비스 방문 허용**이라고 표시된 **켜기/끄기** 단추가 있습니다. **켜기** 설정은 모든 Azure IP 주소와 모든 Azure 서브넷에서 보낸 통신을 허용합니다. 이러한 Azure IP 또는 서브넷은 사용자가 소유할 수 없습니다. 이 **켜기** 설정은 Azure Database for MariaDB 데이터베이스에 필요한 것보다 더 개방적일 수 있습니다. 가상 네트워크 규칙 기능으로 훨씬 더 세밀하게 제어할 수 있습니다.
 
 ### <a name="b-ip-rules"></a>B. IP 규칙
 
