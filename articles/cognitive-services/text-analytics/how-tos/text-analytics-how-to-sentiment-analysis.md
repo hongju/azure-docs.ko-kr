@@ -37,7 +37,7 @@ Text Analytics는 기계 학습 분류 알고리즘을 사용하여 0과1 사이
 
 감정 분석에서는 사용할 텍스트를 더 작은 청크로 분할하여 제공하면 더 높은 품질의 결과를 생성합니다. 이는 구 블록이 클수록 더 잘 수행되는 핵심 구 추출과는 반대입니다. 두 작업에서 최상의 결과를 얻으려면 이에 따라 입력을 다시 구성하는 것이 좋습니다.
 
-다음 형식의 JSON 문서가 있어야 합니다. ID, 텍스트, 언어
+다음 형식의 JSON 문서가 있어야 합니다. ID, text, language
 
 문서 크기는 문서당 5,120자 미만이어야 하며, 컬렉션당 최대 1,000개의 항목(ID)을 포함할 수 있습니다. 컬렉션은 요청 본문에 제출됩니다. 감정 분석을 위해 제출할 수 있는 콘텐츠의 예제는 다음과 같습니다.
 
@@ -136,7 +136,7 @@ Text Analytics는 기계 학습 분류 알고리즘을 사용하여 0과1 사이
 이 문서에서는 Cognitive Services의 Text Analytics를 사용하여 감정 분석에 대한 개념과 워크플로를 알아보았습니다. 요약하면 다음과 같습니다.
 
 + [감정 분석 API](https://westcentralus.dev.cognitive.microsoft.com/docs/services/TextAnalytics-v2-1/operations/56f30ceeeda5650db055a3c9)는 선택한 언어로 사용할 수 있습니다.
-+ 요청 본문의 JSON 문서에는 ID, 텍스트 및 언어 코드가 포함됩니다.
++ 요청 본문의 JSON 문서에는 ID,  text 및 language 코드가 포함됩니다.
 + POST 요청은 개인 설정된 [액세스 키와 구독에 유효한 엔드포인트](text-analytics-how-to-access-key.md)를 사용하여 `/sentiment` 엔드포인트에 대해 수행됩니다.
 + 각 문서 ID에 대한 감정 점수로 구성된 응답 출력은 Excel 및 Power BI를 포함하여 JSON을 허용하는 모든 앱으로 스트림할 수 있습니다.
 
