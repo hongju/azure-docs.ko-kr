@@ -32,7 +32,7 @@ LargePersonGroup과 LargeFaceList는 총괄하여 대규모 작업이라고 합�
 
 Face API 클라이언트 라이브러리를 사용하면 구독 키 및 구독 엔드포인트가 FaceServiceClient 클래스의 생성자를 통해 전달됩니다. 예:
 
-```CSharp
+```csharp
 string SubscriptionKey = "<Subscription Key>";
 // Use your own subscription endpoint corresponding to the subscription key.
 string SubscriptionRegion = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/";
@@ -70,7 +70,7 @@ PersonGroup의 모든 얼굴과 사람을 새 LargePersonGroup에 추가합니�
 
 앞의 테이블은 FaceList와 LargeFaceList 간 목록 수준 작업의 비교입니다. 표시된 대로 FaceList와 비교할 때 LargeFaceList에는 Train(학습) 및 Get Training Status(학습 상태 가져오기)라는 새 작업이 제공됩니다. LargeFaceList 학습은 [FindSimilar](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395237) 작업의 전제 조건입니다. FaceList에는 학습이 필요하지 않습니다. 다음 코드 조각은 LargeFaceList의 학습을 기다리는 도우미 함수입니다.
 
-```CSharp
+```csharp
 /// <summary>
 /// Helper function to train LargeFaceList and wait for finish.
 /// </summary>
@@ -120,7 +120,7 @@ private static async Task TrainLargeFaceList(
 
 이전에 얼굴이 추가되고 FindSimilar가 있는 FaceList의 일반적인 사용법은 다음과 같았습니다.
 
-```CSharp
+```csharp
 // Create a FaceList.
 const string FaceListId = "myfacelistid_001";
 const string FaceListName = "MyFaceListDisplayName";
@@ -153,7 +153,7 @@ using (Stream stream = File.OpenRead(QueryImagePath))
 
 LargeFaceList로 마이그레이션하는 경우 다음과 같이 됩니다.
 
-```CSharp
+```csharp
 // Create a LargeFaceList.
 const string LargeFaceListId = "mylargefacelistid_001";
 const string LargeFaceListName = "MyLargeFaceListDisplayName";
@@ -230,7 +230,7 @@ LargePersonGroup 또는 LargeFaceList의 사람 또는 얼굴은 학습된 후�
 
 `TrainLargeFaceList`와 비슷한 `TrainLargePersonGroup` 함수가 있다고 가정합니다. `System.Timers`에서 [`Timer`](https://msdn.microsoft.com/library/system.timers.timer(v=vs.110).aspx) 클래스를 호출하여 LargePersonGroup에 대한 독립 실행형 학습을 구현하는 일반적인 방법은 다음과 같습니다.
 
-```CSharp
+```csharp
 private static void Main()
 {
     // Create a LargePersonGroup.
