@@ -74,7 +74,7 @@ AdventureWorksLT 샘플 데이터를 포함하는 단일 데이터베이스를 �
 
 1. Azure Portal의 왼쪽 메뉴에서 **리소스 그룹**을 선택한 다음, **myResourceGroup**을 선택합니다.
 2. 리소스 그룹 페이지에서 **리소스 그룹 삭제**를 선택합니다.
-3. 필드에 *myResourceGroup*을 입력한 다음, **삭제**를 선택합니다.
+3. 텍스트 상자에 *myResourceGroup*을 입력한 다음, **삭제**를 선택합니다.
 
 ## <a name="next-steps"></a>다음 단계
 
